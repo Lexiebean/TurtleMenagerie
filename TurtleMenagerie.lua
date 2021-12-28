@@ -25,13 +25,13 @@ local function FindFriends()
 	end
 end
 
-SLASH_MENAGERIEPET1 = "/randompet"
+SLASH_MENAGERIEPET1, SLASH_MENAGERIEPET2 = "/randompet", "/randpet"
 SlashCmdList["MENAGERIEPET"] = function()
 	FindFriends()
 	CastSpellByName(pets[math.random(table.getn(pets))])
 end
 
-SLASH_MENAGERIEMOUNT1 = "/randommount"
+SLASH_MENAGERIEMOUNT1, SLASH_MENAGERIEMOUNT2 = "/randommount", "/randmount"
 SlashCmdList["MENAGERIEMOUNT"] = function()
 	FindFriends()
 	CastSpellByName(mounts[math.random(table.getn(mounts))])
