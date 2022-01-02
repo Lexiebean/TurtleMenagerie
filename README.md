@@ -1,4 +1,4 @@
-# TurtleMenagerie
+# Turtle Menagerie
 A simple addon for Turtle WoW to summon a random mount or pet from your spellbook.
 
 Now with better support for AQ40 and bug mounts.
