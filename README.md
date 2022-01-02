@@ -11,7 +11,6 @@ Now with better support for AQ40 and bug mounts.
 `/randpet bl _pet_` - Blacklists a pet. eg. /randpet bl Lulu - Pets can be linked from the collection tab for this command.  
 `/randmount bl _mount_` - Blacklists a mount. eg. /randpet bl [Riding Turtle] - Mounts can be linked from the collection tab for this command.
 
-`/randpet rm _number_` - Removes the nᵗʰ entry from the blacklist. Check `/randpet ls` eg. /randpet rm 1  
-`/randmount rm _number_` - Removes the nᵗʰ entry from the blacklist. Check `/randmount ls` eg. /randmount rm 1
+`/randpet rm _number_` or `/randmount rm _number_` - Removes the nᵗʰ entry from the blacklist. Check `/randpet ls` eg. /randpet rm 1
 
 Install location should be: ..\Interface\AddOns\TurtleMenagerie
