@@ -2,5 +2,6 @@
 ## Title: Turtle Menagerie
 ## Author: Lexie
 ## Notes: Summon a random mount or pet
-## Version: 1.0.0
+## Version: 2
+## SavedVariables: Menagerie_Pets Menagerie_Mounts
 TurtleMenagerie.lua
