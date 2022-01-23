@@ -1,6 +1,22 @@
 if not Menagerie_Pets then Menagerie_Pets = { } end
 if not Menagerie_Mounts then Menagerie_Mounts = { } end
 local gfind = string.gmatch or string.gfind
+local function strmatch(str, pat, init)
+	local a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a13,a14,a15,a16,a17,a18,a19,a20 = string.find(str, pat, init)
+	return a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a13,a14,a15,a16,a17,a18,a19,a20
+end
+
+function Menagerie_OnEvent(event, arg1)
+    if event == "UNIT_FLAGS" and arg1 == "player" then
+        if UnitOnTaxi("player") == 1 then
+            DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Flying")
+        else
+            DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r NOT flying")
+        end
+	elseif event == "PLAYER_ENTERING_WORLD" then
+		DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Entering World")
+	end
+end
 
 -- Generate the list of friends
 local function FindFriends()
