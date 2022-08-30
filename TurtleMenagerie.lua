@@ -1,5 +1,7 @@
 if not Menagerie_Pets then Menagerie_Pets = { } end
 if not Menagerie_Mounts then Menagerie_Mounts = { } end
+Menagerie_LastPet = ""
+Menagerie_LastMount = ""
 local gfind = string.gmatch or string.gfind
 local function strmatch(str, pat, init)
 	local a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a13,a14,a15,a16,a17,a18,a19,a20 = string.find(str, pat, init)
@@ -42,6 +44,7 @@ local function FindFriends()
 					table.insert(pets, spell)
 				end
 			end
+			table.insert(pets, Menagerie_LastPet)
 		end
 		
 		if name == "ZMounts" then
@@ -68,6 +71,7 @@ local function FindFriends()
 					end
 				end
 			end
+			table.insert(mounts, Menagerie_LastMount)
 		end
 	end
 end
@@ -139,9 +143,11 @@ function Menagerie(message)
 	-- Summon our friends!
 	else
 		if commandlist[1] == "pets" then
-			CastSpellByName(pets[math.random(table.getn(pets))])
+			Menagerie_LastPet = pets[math.random(table.getn(pets))]
+			CastSpellByName(Menagerie_LastPet)
 		else
-			CastSpellByName(mounts[math.random(table.getn(mounts))])
+			Menagerie_LastMount = mounts[math.random(table.getn(mounts))]
+			CastSpellByName(Menagerie_LastMount)
 		end
 	end
 end
