@@ -40,11 +40,13 @@ local function FindFriends()
 						bl = true
 					end
 				end
+				if string.lower(spell) == string.lower(Menagerie_LastPet) then
+					bl = true
+				end
 				if not bl then 
 					table.insert(pets, spell)
 				end
 			end
-			table.insert(pets, Menagerie_LastPet)
 		end
 		
 		if name == "ZMounts" then
@@ -58,7 +60,10 @@ local function FindFriends()
 						bl = true
 					end
 				end
-				if not bl then
+				if string.lower(spell) == string.lower(Menagerie_LastMount) then
+					bl = true
+				end
+				if not bl or GetZoneText() == "Ahn'Qiraj"then
 					-- Dirty check to see if we're in AQ40 or not and only add the appropriate mounts to the list. ...I'm tired, this is messy. But probably works? IDK
 					if GetZoneText() ~= "Ahn'Qiraj" then
 						if spell ~= "Summon Red Qiraji Battle Tank" and spell ~= "Summon Green Qiraji Battle Tank" and spell ~= "Summon Blue Qiraji Battle Tank" then
@@ -71,7 +76,6 @@ local function FindFriends()
 					end
 				end
 			end
-			table.insert(mounts, Menagerie_LastMount)
 		end
 	end
 end
