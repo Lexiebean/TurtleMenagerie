@@ -60,10 +60,7 @@ local function FindFriends()
 						bl = true
 					end
 				end
-				if string.lower(spell) == string.lower(Menagerie_LastMount) then
-					bl = true
-				end
-				if not bl or GetZoneText() == "Ahn'Qiraj"then
+				if not bl then
 					-- Dirty check to see if we're in AQ40 or not and only add the appropriate mounts to the list. ...I'm tired, this is messy. But probably works? IDK
 					if GetZoneText() ~= "Ahn'Qiraj" then
 						if spell ~= "Summon Red Qiraji Battle Tank" and spell ~= "Summon Green Qiraji Battle Tank" and spell ~= "Summon Blue Qiraji Battle Tank" and spell ~= "Summon Yellow Qiraji Battle Tank" then
@@ -88,6 +85,11 @@ end
 SLASH_MENAGERIEMOUNT1, SLASH_MENAGERIEMOUNT2 = "/randommount", "/randmount"
 SlashCmdList["MENAGERIEMOUNT"] = function(message)
 	Menagerie("mounts " .. message)
+end
+
+SLASH_MENAGERIEBANK1 = "/bank"
+SlashCmdList["SLASH_MENAGERIEBANK1"] = function(message)
+	 CastSpellByName("Forworn Mule")
 end
 
 -- A lot of this blacklist code is heavily based on Shagu's ShaguChat.
@@ -147,9 +149,15 @@ function Menagerie(message)
 	-- Summon our friends!
 	else
 		if commandlist[1] == "pets" then
+			if table.getn(pets) > 1 then
+				table.insert(pets, Menagerie_LastPet)
+			end
 			Menagerie_LastPet = pets[math.random(table.getn(pets))]
 			CastSpellByName(Menagerie_LastPet)
 		else
+			if table.getn(mounts) > 1 then
+				table.insert(mounts, Menagerie_LastMount)
+			end
 			Menagerie_LastMount = mounts[math.random(table.getn(mounts))]
 			CastSpellByName(Menagerie_LastMount)
 		end

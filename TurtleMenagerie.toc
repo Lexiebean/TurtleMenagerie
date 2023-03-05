@@ -1,7 +1,7 @@
 ## Interface: 11200
 ## Title: Turtle Menagerie
-## Author: Lexie
+## Author: |cffbe5effLexie|r
 ## Notes: Summon a random mount or pet
-## Version: 2.3.2
+## Version: 2.3.3
 ## SavedVariables: Menagerie_Pets Menagerie_Mounts
 TurtleMenagerie.lua
