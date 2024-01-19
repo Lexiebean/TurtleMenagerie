@@ -29,7 +29,7 @@ local function FindFriends()
 		  break;
 	   end
 
-		if name == "ZCompanions" then
+		if name == "ZzCompanions" then
 			for s = offset + 1, offset + numSpells do
 				local spell, rank = GetSpellName(s, BOOKTYPE_SPELL);
 				
