@@ -63,11 +63,11 @@ local function FindFriends()
 				if not bl then
 					-- Dirty check to see if we're in AQ40 or not and only add the appropriate mounts to the list. ...I'm tired, this is messy. But probably works? IDK
 					if GetZoneText() ~= "Ahn'Qiraj" then
-						if spell ~= "Summon Red Qiraji Battle Tank" and spell ~= "Summon Green Qiraji Battle Tank" and spell ~= "Summon Blue Qiraji Battle Tank" and spell ~= "Summon Yellow Qiraji Battle Tank" then
+						if not string.find(spell, "Qiraji Battle Tank") then
 							table.insert(mounts, spell)
 						end
 					else
-						if spell == "Summon Red Qiraji Battle Tank" or spell == "Summon Green Qiraji Battle Tank" or spell == "Summon Blue Qiraji Battle Tank" or spell == "Summon Black Qiraji Battle Tank" or spell == "Summon Yellow Qiraji Battle Tank" then
+						if string.find(spell, "Qiraji Battle Tank") then
 							table.insert(mounts, spell)
 						end
 					end
