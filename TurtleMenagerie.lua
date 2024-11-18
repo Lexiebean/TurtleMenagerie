@@ -63,11 +63,11 @@ local function FindFriends()
 				if not bl then
 					-- Dirty check to see if we're in AQ40 or not and only add the appropriate mounts to the list. ...I'm tired, this is messy. But probably works? IDK
 					if GetZoneText() ~= "Ahn'Qiraj" then
-						if spell ~= "Summon Red Qiraji Battle Tank" and spell ~= "Summon Green Qiraji Battle Tank" and spell ~= "Summon Blue Qiraji Battle Tank" and spell ~= "Summon Yellow Qiraji Battle Tank" then
+						if not string.find(spell, "Qiraji Battle Tank") then
 							table.insert(mounts, spell)
 						end
 					else
-						if spell == "Summon Red Qiraji Battle Tank" or spell == "Summon Green Qiraji Battle Tank" or spell == "Summon Blue Qiraji Battle Tank" or spell == "Summon Black Qiraji Battle Tank" or spell == "Summon Yellow Qiraji Battle Tank" then
+						if string.find(spell, "Qiraji Battle Tank") then
 							table.insert(mounts, spell)
 						end
 					end
@@ -122,14 +122,20 @@ function Menagerie(message)
 
 	-- Remove from blacklist
 	elseif commandlist[2] == "rm" then
-		if Menagerie_Pets[tonumber(commandlist[3])] ~= nil then
-			DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Removing |cffbe5eff" .. Menagerie_Pets[tonumber(commandlist[3])]
-			.. "|r from your blacklist list")
-			table.remove(Menagerie_Pets, commandlist[3])
-		elseif Menagerie_Mounts[tonumber(commandlist[3] - table.getn(Menagerie_Mounts))] ~= nil then
-			DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Removing |cffbe5eff" .. Menagerie_Mounts[tonumber(commandlist[3] - table.getn(Menagerie_Mounts))]
-			.. "|r from your blacklist list")
-			table.remove(Menagerie_Mounts, commandlist[3] - table.getn(Menagerie_Mounts))
+		local name = ""
+		local rmTable = Menagerie_Mounts
+		if commandlist[1] == "pets" then rmTable = Menagerie_Pets end
+		for i = 3, table.getn(commandlist) do
+			name = name .. commandlist[i] .. " "
+		end
+		name= string.sub(name,1, string.len(name)-1)
+		local isContained, index = doesTableContain(rmTable,name)
+		if isContained and commandlist[1] == "pets" then
+			DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Removing |cffbe5eff" .. name .. "|r from your blacklist list")
+			table.remove(Menagerie_Pets, index)
+		elseif isContained then
+			DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Removing |cffbe5eff" .. name .. "|r from your blacklist list")
+			table.remove(Menagerie_Mounts, index)
 		end
 	
 	-- List the blacklist
@@ -162,4 +168,16 @@ function Menagerie(message)
 			CastSpellByName(Menagerie_LastMount)
 		end
 	end
+end
+
+function doesTableContain(table, contains)
+    local found = false
+	local index = nil
+    for k, v in pairs(table) do
+        if v == contains then 
+            found = true 
+			index = k
+        end
+    end
+    return found, index
 end
