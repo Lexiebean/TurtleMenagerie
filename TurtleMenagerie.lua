@@ -9,12 +9,12 @@ local function strmatch(str, pat, init)
 end
 
 function Menagerie_OnEvent(event, arg1)
-    if event == "UNIT_FLAGS" and arg1 == "player" then
-        if UnitOnTaxi("player") == 1 then
-            DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Flying")
-        else
-            DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r NOT flying")
-        end
+	if event == "UNIT_FLAGS" and arg1 == "player" then
+		if UnitOnTaxi("player") == 1 then
+			DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Flying")
+		else
+			DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r NOT flying")
+		end
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r Entering World")
 	end
@@ -158,26 +158,34 @@ function Menagerie(message)
 			if table.getn(pets) > 1 then
 				table.insert(pets, Menagerie_LastPet)
 			end
-			Menagerie_LastPet = pets[math.random(table.getn(pets))]
-			CastSpellByName(Menagerie_LastPet)
+			if table.getn(pets) > 0 then
+				Menagerie_LastPet = pets[math.random(table.getn(pets))]
+				CastSpellByName(Menagerie_LastPet)
+			else
+				DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r No pets available.")
+			end
 		else
 			if table.getn(mounts) > 1 then
 				table.insert(mounts, Menagerie_LastMount)
 			end
-			Menagerie_LastMount = mounts[math.random(table.getn(mounts))]
-			CastSpellByName(Menagerie_LastMount)
+			if table.getn(mounts) > 0 then
+				Menagerie_LastMount = mounts[math.random(table.getn(mounts))]
+				CastSpellByName(Menagerie_LastMount)
+			else
+				DEFAULT_CHAT_FRAME:AddMessage("|cffbe5eff[Turtle Menagerie]|r No mounts available.")
+			end
 		end
 	end
 end
 
 function doesTableContain(table, contains)
-    local found = false
+	local found = false
 	local index = nil
-    for k, v in pairs(table) do
-        if v == contains then 
-            found = true 
+	for k, v in pairs(table) do
+		if v == contains then 
+			found = true 
 			index = k
-        end
-    end
-    return found, index
+		end
+	end
+	return found, index
 end
